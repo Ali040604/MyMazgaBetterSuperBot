@@ -39,7 +39,7 @@ public class Bot extends TelegramLongPollingBot {
             System.out.println(message.getChat().getId());
             long id = message.getFrom().getId();
             String chatId = message.getChatId().toString();
-            if (repository.findById(id).isEmpty()) {
+            if (!repository.findById(id).isPresent()) {
                 repository.save(new Player(id, "@"+message.getFrom().getUserName()));
             } else {
                 repository.deleteById(id);
